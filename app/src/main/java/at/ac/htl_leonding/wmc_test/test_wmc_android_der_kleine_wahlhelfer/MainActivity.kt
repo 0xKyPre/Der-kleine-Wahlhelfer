@@ -56,13 +56,26 @@ class MainActivity : ComponentActivity() {
 
                             entry<Overview> { key ->
                                 OverviewScreen(
-                                    title = key.title
+                                    title = key.title,
+                                    onAboutClick = {
+                                        backStack.add(About("About"))
+                                    },
+                                    onHomeClick = {
+                                        backStack.add(Home("Home"))
+                                    }
                                 )
                             }
 
                             entry<Count> { key ->
                                 CountScreen(
-                                    title = key.title
+                                    title = key.title,
+                                    modifier = Modifier,
+                                    onAboutClick = {
+                                        backStack.add(About("About"))
+                                    },
+                                    onHomeClick = {
+                                        backStack.add(Home("Home"))
+                                    }
                                 )
                             }
                         }
