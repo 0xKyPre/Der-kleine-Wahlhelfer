@@ -74,7 +74,6 @@ class MainActivity : ComponentActivity() {
                             entry<Count> { key ->
                                 CountScreen(
                                     title = key.title,
-                                    modifier = Modifier,
                                     onAboutClick = {
                                         backStack.add(About("About"))
                                     },

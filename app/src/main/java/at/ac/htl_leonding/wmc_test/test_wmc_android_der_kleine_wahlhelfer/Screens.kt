@@ -19,7 +19,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Button
@@ -61,22 +63,63 @@ fun HomeScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(onClick = onAboutClick) {
-            Text("Go to About")
+            Row(
+                modifier = Modifier.width(200.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Info,
+                    contentDescription = "icon",
+                    tint = MaterialTheme.colorScheme.surface,
+                )
+
+                Spacer(modifier = Modifier.width(10.dp))
+
+                Text("Go to About")
+            }
         }
 
         Button(onClick = onCounterClick) {
-            Text("Go to Counter")
+            Row(
+                modifier = Modifier.width(200.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Icon(
+                    imageVector = Icons.Default.AddCircle,
+                    contentDescription = "icon",
+                    tint = MaterialTheme.colorScheme.surface,
+                )
+
+                Spacer(modifier = Modifier.width(10.dp))
+
+                Text("Go to Counter")
+            }
         }
 
         Button(onClick = onOverviewClick) {
-            Text("Go to Overview")
+            Row(
+                modifier = Modifier.width(200.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Icon(
+                    imageVector = Icons.Default.DateRange,
+                    contentDescription = "icon",
+                    tint = MaterialTheme.colorScheme.surface,
+                )
+
+                Spacer(modifier = Modifier.width(10.dp))
+
+                Text("Go to Overview")
+            }
         }
     }
 }
 @Composable
 fun CountScreen(
     title: String,
-    modifier: Modifier = Modifier,
     onAboutClick: () -> Unit,
     onHomeClick: () -> Unit,
     onVoteLetterSubmittet: (Int) -> Unit
@@ -388,7 +431,6 @@ fun CountScreenPreview() {
     MaterialTheme {
         CountScreen(
             "Counter",
-            Modifier,
             {},
             {},
             {}
