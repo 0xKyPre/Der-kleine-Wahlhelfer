@@ -10,13 +10,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import at.ac.htl_leonding.wmc_test.test_wmc_android_der_kleine_wahlhelfer.ui.theme.TestWMCAndroidderkleineWahlhelferTheme
-import java.util.Map.entry
+import androidx.compose.runtime.*
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +27,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             TestWMCAndroidderkleineWahlhelferTheme {
                 val backStack = rememberNavBackStack(Home("Home"))
+                var totalCount by remember { mutableStateOf(0) }
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     NavDisplay(
@@ -43,8 +46,8 @@ class MainActivity : ComponentActivity() {
                                         backStack.add(Count("Counter"))
                                     },
                                     onOverviewClick = {
-                                        backStack.add(Overview("Overview"))
-                                    }
+                                        backStack.add(Overview(amountOfVotes = totalCount))
+                                    },
                                 )
                             }
 
@@ -56,7 +59,7 @@ class MainActivity : ComponentActivity() {
 
                             entry<Overview> { key ->
                                 OverviewScreen(
-                                    title = key.title,
+                                    totalAmountOfVotes = totalCount,
                                     onAboutClick = {
                                         backStack.add(About("About"))
                                     },
@@ -75,7 +78,11 @@ class MainActivity : ComponentActivity() {
                                     },
                                     onHomeClick = {
                                         backStack.add(Home("Home"))
-                                    }
+                                    },
+                                    onVoteLetterSubmittet = { amountOfVotes ->
+                                        totalCount += amountOfVotes
+                                        backStack.add(Overview(totalCount))
+                                    },
                                 )
                             }
                         }

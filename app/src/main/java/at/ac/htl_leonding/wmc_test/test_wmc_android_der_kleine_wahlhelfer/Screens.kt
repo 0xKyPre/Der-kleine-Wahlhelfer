@@ -68,7 +68,8 @@ fun CountScreen(
     title: String,
     modifier: Modifier = Modifier,
     onAboutClick: () -> Unit,
-    onHomeClick: () -> Unit
+    onHomeClick: () -> Unit,
+    onVoteLetterSubmittet: (Int) -> Unit
 ) {
     var counter by remember { mutableStateOf(value = 0) }
 
@@ -122,13 +123,21 @@ fun CountScreen(
                     )
                 }
             }
+
+            Button(
+                onClick = { onVoteLetterSubmittet(counter) }
+            ) {
+                Text(
+                    "Submit"
+                )
+            }
         }
     }
 }
 
 @Composable
 fun OverviewScreen(
-    title: String,
+    totalAmountOfVotes: Int,
     onAboutClick: () -> Unit,
     onHomeClick:() -> Unit
 ) {
@@ -138,7 +147,9 @@ fun OverviewScreen(
     ) {
         TopNavBar(onAboutClick, onHomeClick)
 
-        Text(title)
+        Text("Overview")
+
+        Text("$totalAmountOfVotes")
     }
 }
 
@@ -233,6 +244,7 @@ fun CountScreenPreview() {
             "Counter",
             Modifier,
             {},
+            {},
             {}
         )
     }
@@ -244,7 +256,7 @@ fun CountScreenPreview() {
 @Composable
 fun OverviewScreenPreview() {
     MaterialTheme {
-        OverviewScreen("Overview", {}, {})
+        OverviewScreen(10, {}, {})
     }
 }
 

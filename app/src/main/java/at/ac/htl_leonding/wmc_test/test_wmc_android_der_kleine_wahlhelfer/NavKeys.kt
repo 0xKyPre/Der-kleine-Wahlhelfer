@@ -10,7 +10,9 @@ data class Home(val title: String) : NavKey
 data class About(val title: String) : NavKey
 
 @Serializable
-data class Overview(val title: String) : NavKey
+data class Overview(
+    val amountOfVotes: Int
+) : NavKey
 
 @Serializable
 data class Count(val title: String) : NavKey
