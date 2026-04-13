@@ -21,7 +21,9 @@ import androidx.compose.ui.unit.dp
 fun HomeScreen(
     modifier: Modifier = Modifier,
     title: String,
-    onAboutClick: () -> Unit
+    onAboutClick: () -> Unit,
+    onCounterClick: () -> Unit,
+    onOverviewClick: () -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -36,13 +38,24 @@ fun HomeScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(onClick = onAboutClick) {
+            Text("Go to About")
+        }
+
+        Button(onClick = onCounterClick) {
             Text("Go to Counter")
+        }
+
+        Button(onClick = onOverviewClick) {
+            Text("Go to Overview")
         }
     }
 }
 
 @Composable
-fun CountScreen(modifier: Modifier = Modifier) {
+fun CountScreen(
+    title: String,
+    modifier: Modifier = Modifier
+) {
     var counter by remember { mutableStateOf(value = 0) }
 
     Column(
@@ -66,7 +79,9 @@ fun CountScreen(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun OverviewScreen() {
+fun OverviewScreen(
+    title: String
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -100,7 +115,9 @@ fun HomeScreenPreview() {
     MaterialTheme {
         HomeScreen(
             Modifier,
-            "Title",
+            "Home",
+            {},
+            {},
             {}
         )
     }
@@ -112,7 +129,9 @@ fun HomeScreenPreview() {
 @Composable
 fun CountScreenPreview() {
     MaterialTheme {
-        CountScreen()
+        CountScreen(
+            "Counter"
+        )
     }
 }
 
@@ -122,7 +141,7 @@ fun CountScreenPreview() {
 @Composable
 fun OverviewScreenPreview() {
     MaterialTheme {
-        OverviewScreen()
+        OverviewScreen("")
     }
 }
 

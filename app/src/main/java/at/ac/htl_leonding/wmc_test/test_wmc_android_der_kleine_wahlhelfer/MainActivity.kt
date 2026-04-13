@@ -35,13 +35,33 @@ class MainActivity : ComponentActivity() {
                             entry<Home> { key ->
                                 HomeScreen(
                                     title = key.title,
+                                    modifier = Modifier,
                                     onAboutClick = {
-                                        backStack.add(About("Profile"))
+                                        backStack.add(About("About"))
+                                    },
+                                    onCounterClick = {
+                                        backStack.add(Count("Counter"))
+                                    },
+                                    onOverviewClick = {
+                                        backStack.add(Overview("Overview"))
                                     }
                                 )
                             }
+
                             entry<About> { key ->
                                 AboutScreen(
+                                    title = key.title
+                                )
+                            }
+
+                            entry<Overview> { key ->
+                                OverviewScreen(
+                                    title = key.title
+                                )
+                            }
+
+                            entry<Count> { key ->
+                                CountScreen(
                                     title = key.title
                                 )
                             }
