@@ -38,7 +38,6 @@ class MainActivity : ComponentActivity() {
                             entry<Home> { key ->
                                 HomeScreen(
                                     title = key.title,
-                                    modifier = Modifier,
                                     onAboutClick = {
                                         backStack.add(About("About"))
                                     },
@@ -53,7 +52,10 @@ class MainActivity : ComponentActivity() {
 
                             entry<About> { key ->
                                 AboutScreen(
-                                    title = key.title
+                                    title = key.title,
+                                    onClickBack = {
+                                        backStack.removeLastOrNull()
+                                    }
                                 )
                             }
 
