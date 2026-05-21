@@ -63,11 +63,15 @@ class MainActivity : ComponentActivity() {
                             entry<Overview> { key ->
                                 OverviewScreen(
                                     totalAmountOfVotes = totalCount,
+                                    parties = parties,
                                     onAboutClick = {
                                         backStack.add(About("About"))
                                     },
                                     onHomeClick = {
                                         backStack.add(Home("Home"))
+                                    },
+                                    onClickBack = {
+                                        backStack.removeLastOrNull()
                                     }
                                 )
                             }

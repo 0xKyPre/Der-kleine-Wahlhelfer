@@ -4,6 +4,7 @@ import android.text.Layout
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.gestures.snapping.SnapPosition
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,6 +17,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -25,6 +28,7 @@ import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -193,14 +197,16 @@ fun CountScreen(
 @Composable
 fun OverviewScreen(
     totalAmountOfVotes: Int,
+    parties: List<String>,
     onAboutClick: () -> Unit,
-    onHomeClick:() -> Unit
+    onHomeClick: () -> Unit,
+    onClickBack: () -> Unit
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+
         TopNavBar(onAboutClick, onHomeClick)
 
         Column(
@@ -215,9 +221,57 @@ fun OverviewScreen(
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            Text(
-                "$totalAmountOfVotes Votes"
-            )
+            Text("$totalAmountOfVotes Votes")
+        }
+
+        LazyColumn(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth()
+                .padding(10.dp)
+        ) {
+
+            items(parties) { party ->
+
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 4.dp)
+                ) {
+                    Text(
+                        text = party,
+                        modifier = Modifier.padding(16.dp)
+                    )
+                }
+            }
+        }
+
+        Button(
+            onClick = onClickBack,
+            modifier = Modifier
+                .padding(bottom = 16.dp)
+                .width(200.dp),
+            contentPadding = PaddingValues(0.dp)
+        ) {
+            Row (
+                modifier = Modifier
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = null,
+                    tint = Color.White,
+                    modifier = Modifier.size(24.dp)
+                )
+
+                Spacer(modifier = Modifier.width(10.dp))
+
+                Text(
+                    "Back to Counter"
+                )
+            }
         }
     }
 }
@@ -408,6 +462,15 @@ fun TopNavBar(
 // Previews
 // -------------------------------------------------------------
 
+val parties = listOf(
+    "PDSÖ",
+    "SPÖ",
+    "ÖVP",
+    "FPÖ",
+    "Grüne",
+    "NEOS"
+)
+
 @Preview(
     showBackground = true
 )
@@ -444,7 +507,7 @@ fun CountScreenPreview() {
 @Composable
 fun OverviewScreenPreview() {
     MaterialTheme {
-        OverviewScreen(10, {}, {})
+        OverviewScreen(10, parties, {}, {}, {})
     }
 }
 
