@@ -10,9 +10,15 @@ kotlin = "2.3.20"
 composeBom = "2026.03.01"
 navigation3Runtime = "1.1.0"
 kotlinxSerializationCore = "1.11.0"
+roomCompiler = "2.8.4"
+roomCommonJvm = "2.8.4"
+roomKtx = "2.8.4"
+roomKtxVersion = "2.6.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-room-ktx-v261 = { module = "androidx.room:room-ktx", version.ref = "roomKtxVersion" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomKtxVersion" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -30,6 +36,9 @@ androidx-navigation3-runtime = { module = "androidx.navigation3:navigation3-runt
 androidx-navigation3-ui = { module = "androidx.navigation3:navigation3-ui", version.ref = "navigation3Runtime" }
 kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinxSerializationCore" }
 compose-material-icons = { group = "androidx.compose.material", name = "material-icons-core" }
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomCompiler" }
+androidx-room-common-jvm = { group = "androidx.room", name = "room-common-jvm", version.ref = "roomCommonJvm" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
