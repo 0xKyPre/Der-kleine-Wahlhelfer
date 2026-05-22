@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -26,6 +27,7 @@ import at.ac.htl_leonding.wmc_test.test_wmc_android_der_kleine_wahlhelfer.ui.com
 
 @Composable
 fun CountScreen(
+    party: Party,
     onAboutClick: () -> Unit,
     onHomeClick: () -> Unit,
     onVoteLetterSubmittet: (Party, Int) -> Unit
@@ -44,7 +46,7 @@ fun CountScreen(
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "Amount of votes",
+                text = party.name,
                 fontSize = 30.sp
             )
 
@@ -86,7 +88,12 @@ fun CountScreen(
             }
 
             Button(
-                onClick = { onVoteLetterSubmittet(counter) }
+                onClick = {
+                    onVoteLetterSubmittet(
+                        party,
+                        counter
+                    )
+                }
             ) {
                 Text(
                     "Submit"
@@ -101,11 +108,18 @@ fun CountScreen(
 )
 @Composable
 fun CountScreenPreview() {
+
     MaterialTheme {
+
         CountScreen(
-            {},
-            {},
-            {}
+            party = Party(
+                code = "SPÖ",
+                name = "Sozialdemokratische Partei Österreichs",
+                currentVotes = 120
+            ),
+            onAboutClick = {},
+            onHomeClick = {},
+            onVoteLetterSubmittet = { _, _ -> }
         )
     }
 }

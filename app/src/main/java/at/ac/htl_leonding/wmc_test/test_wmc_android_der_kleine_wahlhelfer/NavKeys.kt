@@ -13,4 +13,6 @@ object About: NavKey
 object Overview : NavKey
 
 @Serializable
-object Count: NavKey
+data class Count(
+    val partyCode: String
+): NavKey

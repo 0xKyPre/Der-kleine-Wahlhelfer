@@ -25,7 +25,6 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun HomeScreen(
     onAboutClick: () -> Unit,
-    onCounterClick: () -> Unit,
     onOverviewClick: () -> Unit
 ) {
     Column(
@@ -58,24 +57,6 @@ fun HomeScreen(
             }
         }
 
-        Button(onClick = onCounterClick) {
-            Row(
-                modifier = Modifier.width(200.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
-            ) {
-                Icon(
-                    imageVector = Icons.Default.AddCircle,
-                    contentDescription = "icon",
-                    tint = MaterialTheme.colorScheme.surface,
-                )
-
-                Spacer(modifier = Modifier.width(10.dp))
-
-                Text("Go to Counter")
-            }
-        }
-
         Button(onClick = onOverviewClick) {
             Row(
                 modifier = Modifier.width(200.dp),
@@ -105,7 +86,6 @@ fun HomeScreenPreview() {
         HomeScreen(
             {},
             {},
-            {}
         )
     }
 }

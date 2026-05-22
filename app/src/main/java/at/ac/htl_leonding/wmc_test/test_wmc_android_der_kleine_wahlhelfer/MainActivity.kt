@@ -1,6 +1,7 @@
 package at.ac.htl_leonding.wmc_test.test_wmc_android_der_kleine_wahlhelfer
 
 import android.os.Bundle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -13,6 +14,7 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import at.ac.htl_leonding.wmc_test.test_wmc_android_der_kleine_wahlhelfer.ui.theme.TestWMCAndroidderkleineWahlhelferTheme
 import androidx.compose.runtime.*
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.room.Room
 import at.ac.htl_leonding.wmc_test.test_wmc_android_der_kleine_wahlhelfer.data.AppDatabase
 import at.ac.htl_leonding.wmc_test.test_wmc_android_der_kleine_wahlhelfer.data.entities.Party
@@ -28,24 +30,16 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        val db = AppDatabase.get(this)
+        val repository = PartyRepository(db.partyDao())
+
         setContent {
-            val db = remember {
-                Room.databaseBuilder(
-                    applicationContext,
-                    AppDatabase::class.java,
-                    "der-kleine-wahlhelfer-db"
-                ).build()
-            }
-
-            val repository = remember {
-                PartyRepository(db.partyDao())
-            }
-
             val viewModel: PartyViewModel = viewModel(
                 factory = PartyViewModelFactory(repository)
             )
 
-            val parties by viewModel.parties.collectAsState()
+            val parties by viewModel.parties.collectAsStateWithLifecycle()
 
             LaunchedEffect(Unit) {
 
@@ -105,10 +99,8 @@ class MainActivity : ComponentActivity() {
                             entry<Home> { key ->
                                 HomeScreen(
                                     onAboutClick = {
+                                        backStack.clear()
                                         backStack.add(About)
-                                    },
-                                    onCounterClick = {
-                                        backStack.add(Count)
                                     },
                                     onOverviewClick = {
                                         backStack.add(Overview)
@@ -128,32 +120,40 @@ class MainActivity : ComponentActivity() {
                                 OverviewScreen(
                                     parties = parties,
                                     onAboutClick = {
+                                        backStack.clear()
                                         backStack.add(About)
                                     },
                                     onHomeClick = {
                                         backStack.add(Home)
                                     },
-                                    onClickBack = {
-                                        backStack.add(Count)
+                                    onPartyClick = { party ->
+                                        backStack.add(
+                                            Count(
+                                                partyCode = party.code
+                                            )
+                                        )
                                     }
                                 )
                             }
 
                             entry<Count> { key ->
+
+                                val party = parties.find {
+                                    it.code == key.partyCode
+                                } ?: return@entry
+
                                 CountScreen(
-                                    onAboutClick = {
-                                        backStack.add(About)
-                                    },
-                                    onHomeClick = {
-                                        backStack.add(Home)
-                                    },
-                                    onVoteLetterSubmittet = { party, amountOfVotes ->
+                                    party = party,
+                                    onAboutClick = { backStack.add(About) },
+                                    onHomeClick = { backStack.add(Home) },
+                                    onVoteLetterSubmittet = { p, amount ->
 
                                         viewModel.addVotes(
-                                            party = party,
-                                            amount = amountOfVotes
+                                            party = p,
+                                            amount = amount
                                         )
 
+                                        backStack.clear()
                                         backStack.add(Overview)
                                     }
                                 )

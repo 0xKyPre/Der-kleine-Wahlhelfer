@@ -35,9 +35,9 @@ import at.ac.htl_leonding.wmc_test.test_wmc_android_der_kleine_wahlhelfer.ui.com
 @Composable
 fun OverviewScreen(
     parties: List<Party>,
+    onPartyClick: (Party) -> Unit,
     onAboutClick: () -> Unit,
     onHomeClick: () -> Unit,
-    onClickBack: () -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -67,39 +67,13 @@ fun OverviewScreen(
 
             items(parties) { party ->
                 PartyCard(
-                    partyCode = party.code,
-                    amountOfVotes = party.currentVotes
+                    party = party,
+                    onClick = {
+                        onPartyClick(party)
+                    }
                 )
                 Spacer(
                     modifier = Modifier.height(10.dp)
-                )
-            }
-        }
-
-        Button(
-            onClick = onClickBack,
-            modifier = Modifier
-                .padding(bottom = 16.dp)
-                .width(200.dp),
-            contentPadding = PaddingValues(0.dp)
-        ) {
-            Row (
-                modifier = Modifier
-                    .fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
-            ) {
-                Icon(
-                    imageVector = Icons.Default.ArrowBack,
-                    contentDescription = null,
-                    tint = Color.White,
-                    modifier = Modifier.size(24.dp)
-                )
-
-                Spacer(modifier = Modifier.width(10.dp))
-
-                Text(
-                    "Back to Counter"
                 )
             }
         }
@@ -108,10 +82,11 @@ fun OverviewScreen(
 
 @Composable
 fun PartyCard(
-    partyCode: String,
-    amountOfVotes: Int
+    party: Party,
+    onClick: () -> Unit
 ) {
     Card(
+        onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
     ) {
@@ -123,12 +98,12 @@ fun PartyCard(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = partyCode,
+                text = party.code,
                 modifier = Modifier.padding(10.dp)
             )
 
             Text(
-                "$amountOfVotes Votes"
+                "${party.currentVotes} Votes"
             )
         }
     }
