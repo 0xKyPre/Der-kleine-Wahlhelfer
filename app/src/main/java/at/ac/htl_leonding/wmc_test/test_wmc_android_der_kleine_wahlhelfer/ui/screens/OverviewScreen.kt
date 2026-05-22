@@ -29,13 +29,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import at.ac.htl_leonding.wmc_test.test_wmc_android_der_kleine_wahlhelfer.parties
+import at.ac.htl_leonding.wmc_test.test_wmc_android_der_kleine_wahlhelfer.data.entities.Party
 import at.ac.htl_leonding.wmc_test.test_wmc_android_der_kleine_wahlhelfer.ui.components.TopNavBar
 
 @Composable
 fun OverviewScreen(
-    totalAmountOfVotes: Int,
-    parties: List<String>,
+    parties: List<Party>,
     onAboutClick: () -> Unit,
     onHomeClick: () -> Unit,
     onClickBack: () -> Unit
@@ -68,8 +67,8 @@ fun OverviewScreen(
 
             items(parties) { party ->
                 PartyCard(
-                    partyCode = party,
-                    amountOfVotes = totalAmountOfVotes
+                    partyCode = party.code,
+                    amountOfVotes = party.currentVotes
                 )
                 Spacer(
                     modifier = Modifier.height(10.dp)
@@ -140,7 +139,25 @@ fun PartyCard(
 )
 @Composable
 fun OverviewScreenPreview() {
+    val previewParties = listOf(
+        Party(
+            code = "SPÖ",
+            name = "Sozialdemokratische Partei Österreichs",
+            currentVotes = 123
+        ),
+        Party(
+            code = "ÖVP",
+            name = "Österreichische Volkspartei",
+            currentVotes = 95
+        ),
+        Party(
+            code = "FPÖ",
+            name = "Freiheitliche Partei Österreichs",
+            currentVotes = 76
+        )
+    )
+
     MaterialTheme {
-        OverviewScreen(10, parties, {}, {}, {})
+        OverviewScreen(parties = previewParties, {}, {}, {})
     }
 }

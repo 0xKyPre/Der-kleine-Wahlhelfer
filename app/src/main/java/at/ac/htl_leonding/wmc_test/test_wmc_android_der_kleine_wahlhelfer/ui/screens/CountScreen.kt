@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import at.ac.htl_leonding.wmc_test.test_wmc_android_der_kleine_wahlhelfer.data.entities.Party
 import at.ac.htl_leonding.wmc_test.test_wmc_android_der_kleine_wahlhelfer.ui.components.TopNavBar
 
 
@@ -27,7 +28,7 @@ import at.ac.htl_leonding.wmc_test.test_wmc_android_der_kleine_wahlhelfer.ui.com
 fun CountScreen(
     onAboutClick: () -> Unit,
     onHomeClick: () -> Unit,
-    onVoteLetterSubmittet: (Int) -> Unit
+    onVoteLetterSubmittet: (Party, Int) -> Unit
 ) {
     var counter by remember { mutableStateOf(value = 0) }
 

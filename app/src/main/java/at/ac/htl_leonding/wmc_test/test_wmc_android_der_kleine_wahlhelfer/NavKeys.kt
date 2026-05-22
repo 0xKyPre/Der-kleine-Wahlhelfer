@@ -10,8 +10,7 @@ object Home: NavKey
 object About: NavKey
 
 @Serializable
-data class Overview(
-    val amountOfVotes: Int
-) : NavKey
+object Overview : NavKey
+
 @Serializable
 object Count: NavKey
