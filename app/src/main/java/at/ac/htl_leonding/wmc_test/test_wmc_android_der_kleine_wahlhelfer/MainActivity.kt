@@ -41,6 +41,8 @@ class MainActivity : ComponentActivity() {
 
             val parties by viewModel.parties.collectAsStateWithLifecycle()
 
+            println("DEBUG: parties = $parties")
+
             LaunchedEffect(Unit) {
 
                 if (parties.isEmpty()) {
