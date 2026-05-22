@@ -1,12 +1,8 @@
 package at.ac.htl_leonding.wmc_test.test_wmc_android_der_kleine_wahlhelfer
 
-import android.text.Layout
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.gestures.snapping.SnapPosition
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -20,7 +16,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.ArrowBack
@@ -41,15 +36,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.material3.Icon
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 
 @Composable
 fun HomeScreen(
-    title: String,
     onAboutClick: () -> Unit,
     onCounterClick: () -> Unit,
     onOverviewClick: () -> Unit
@@ -123,7 +115,6 @@ fun HomeScreen(
 }
 @Composable
 fun CountScreen(
-    title: String,
     onAboutClick: () -> Unit,
     onHomeClick: () -> Unit,
     onVoteLetterSubmittet: (Int) -> Unit
@@ -278,7 +269,6 @@ fun OverviewScreen(
 
 @Composable
 fun AboutScreen(
-    title: String,
     onClickBack: () -> Unit
 ) {
     Column(
@@ -310,7 +300,7 @@ fun AboutScreen(
             Spacer(modifier = Modifier.width(20.dp))
 
             Text(
-                text = title,
+                text = "About",
                 fontSize = 40.sp,
             )
         }
@@ -478,7 +468,6 @@ val parties = listOf(
 fun HomeScreenPreview() {
     MaterialTheme {
         HomeScreen(
-            "Home",
             {},
             {},
             {}
@@ -493,7 +482,6 @@ fun HomeScreenPreview() {
 fun CountScreenPreview() {
     MaterialTheme {
         CountScreen(
-            "Counter",
             {},
             {},
             {}
@@ -518,7 +506,6 @@ fun OverviewScreenPreview() {
 fun AboutScreenPreview() {
     MaterialTheme {
         AboutScreen(
-            "About",
             {}
         )
     }

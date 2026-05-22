@@ -4,15 +4,14 @@ import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Home(val title: String) : NavKey
+object Home: NavKey
 
 @Serializable
-data class About(val title: String) : NavKey
+object About: NavKey
 
 @Serializable
 data class Overview(
     val amountOfVotes: Int
 ) : NavKey
-
 @Serializable
-data class Count(val title: String) : NavKey
+object Count: NavKey

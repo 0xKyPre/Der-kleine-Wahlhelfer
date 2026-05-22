@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             TestWMCAndroidderkleineWahlhelferTheme {
-                val backStack = rememberNavBackStack(Home("Home"))
+                val backStack = rememberNavBackStack(Home)
                 var totalCount by rememberSaveable { mutableStateOf(0) }
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
@@ -38,12 +38,11 @@ class MainActivity : ComponentActivity() {
                         entryProvider = entryProvider {
                             entry<Home> { key ->
                                 HomeScreen(
-                                    title = key.title,
                                     onAboutClick = {
-                                        backStack.add(About("About"))
+                                        backStack.add(About)
                                     },
                                     onCounterClick = {
-                                        backStack.add(Count("Counter"))
+                                        backStack.add(Count)
                                     },
                                     onOverviewClick = {
                                         backStack.add(Overview(amountOfVotes = totalCount))
@@ -53,7 +52,6 @@ class MainActivity : ComponentActivity() {
 
                             entry<About> { key ->
                                 AboutScreen(
-                                    title = key.title,
                                     onClickBack = {
                                         backStack.removeLastOrNull()
                                     }
@@ -65,25 +63,24 @@ class MainActivity : ComponentActivity() {
                                     totalAmountOfVotes = totalCount,
                                     parties = parties,
                                     onAboutClick = {
-                                        backStack.add(About("About"))
+                                        backStack.add(About)
                                     },
                                     onHomeClick = {
-                                        backStack.add(Home("Home"))
+                                        backStack.add(Home)
                                     },
                                     onClickBack = {
-                                        backStack.removeLastOrNull()
+                                        backStack.add(Count)
                                     }
                                 )
                             }
 
                             entry<Count> { key ->
                                 CountScreen(
-                                    title = key.title,
                                     onAboutClick = {
-                                        backStack.add(About("About"))
+                                        backStack.add(About)
                                     },
                                     onHomeClick = {
-                                        backStack.add(Home("Home"))
+                                        backStack.add(Home)
                                     },
                                     onVoteLetterSubmittet = { amountOfVotes ->
                                         totalCount += amountOfVotes
