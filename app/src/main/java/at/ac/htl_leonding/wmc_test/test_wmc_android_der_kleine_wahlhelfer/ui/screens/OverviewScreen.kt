@@ -1,6 +1,7 @@
 package at.ac.htl_leonding.wmc_test.test_wmc_android_der_kleine_wahlhelfer.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -46,19 +47,16 @@ fun OverviewScreen(
 
         TopNavBar(onAboutClick, onHomeClick)
 
-        Column(
+        Box(
             modifier = Modifier
                 .padding(10.dp)
+                .fillMaxWidth()
         ) {
-            Text(
-                text = "Overview - PDSÖ",
+                Text(
+                text = "Overview",
                 fontSize = 30.sp,
                 fontWeight = FontWeight.Bold
             )
-
-            Spacer(modifier = Modifier.height(10.dp))
-
-            Text("$totalAmountOfVotes Votes")
         }
 
         LazyColumn(
@@ -69,17 +67,13 @@ fun OverviewScreen(
         ) {
 
             items(parties) { party ->
-
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 4.dp)
-                ) {
-                    Text(
-                        text = party,
-                        modifier = Modifier.padding(16.dp)
-                    )
-                }
+                PartyCard(
+                    partyCode = party,
+                    amountOfVotes = totalAmountOfVotes
+                )
+                Spacer(
+                    modifier = Modifier.height(10.dp)
+                )
             }
         }
 
@@ -109,6 +103,34 @@ fun OverviewScreen(
                     "Back to Counter"
                 )
             }
+        }
+    }
+}
+
+@Composable
+fun PartyCard(
+    partyCode: String,
+    amountOfVotes: Int
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+    ) {
+        Row (
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(10.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = partyCode,
+                modifier = Modifier.padding(10.dp)
+            )
+
+            Text(
+                "$amountOfVotes Votes"
+            )
         }
     }
 }
