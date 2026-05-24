@@ -15,7 +15,6 @@ import androidx.navigation3.ui.NavDisplay
 import at.ac.htl_leonding.wmc_test.test_wmc_android_der_kleine_wahlhelfer.ui.theme.TestWMCAndroidderkleineWahlhelferTheme
 import androidx.compose.runtime.*
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.room.Room
 import at.ac.htl_leonding.wmc_test.test_wmc_android_der_kleine_wahlhelfer.data.AppDatabase
 import at.ac.htl_leonding.wmc_test.test_wmc_android_der_kleine_wahlhelfer.data.entities.Party
 import at.ac.htl_leonding.wmc_test.test_wmc_android_der_kleine_wahlhelfer.data.repositories.PartyRepository
@@ -102,7 +101,7 @@ class MainActivity : ComponentActivity() {
                         },
                         modifier = Modifier.padding(innerPadding),
                         entryProvider = entryProvider {
-                            entry<Home> { key ->
+                            entry<Home> { _ ->
                                 HomeScreen(
                                     onAboutClick = {
                                         backStack.add(About)
@@ -113,7 +112,7 @@ class MainActivity : ComponentActivity() {
                                 )
                             }
 
-                            entry<About> { key ->
+                            entry<About> { _ ->
                                 AboutScreen(
                                     onClickBack = {
                                         backStack.removeLastOrNull()
@@ -121,15 +120,13 @@ class MainActivity : ComponentActivity() {
                                 )
                             }
 
-                            entry<Overview> { key ->
+                            entry<Overview> { _ ->
                                 OverviewScreen(
                                     parties = parties,
                                     onAboutClick = {
                                         backStack.add(About)
                                     },
                                     onHomeClick = {
-                                        // Pop everything until Home if possible, or just add Home
-                                        // For simplicity and stability, we just add Home or clear carefully
                                         backStack.add(Home)
                                     },
                                     onPartyClick = { party ->
@@ -152,7 +149,7 @@ class MainActivity : ComponentActivity() {
                                     party = party,
                                     onAboutClick = { backStack.add(About) },
                                     onHomeClick = { backStack.add(Home) },
-                                    onVoteLetterSubmittet = { p, amount ->
+                                    onVoteLetterSubmitted = { p, amount ->
 
                                         viewModel.addVotes(
                                             party = p,
