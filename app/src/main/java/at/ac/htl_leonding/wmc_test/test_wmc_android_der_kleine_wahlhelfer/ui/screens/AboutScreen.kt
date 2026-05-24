@@ -14,7 +14,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Build
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -103,7 +105,7 @@ fun AboutScreen(
             ContributorCard(
                 "Kylian Preining",
                 "Android Developer",
-                R.drawable.mycelium
+                Icons.Default.AccountCircle
             )
 
             Spacer(modifier = Modifier.height(10.dp))
@@ -111,7 +113,7 @@ fun AboutScreen(
             ContributorCard(
                 "Android Studio",
                 "Android IDE",
-                R.drawable.warp
+                Icons.Default.Build
             )
         }
     }

@@ -95,13 +95,16 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     NavDisplay(
                         backStack = backStack,
-                        onBack = { backStack.removeLastOrNull() },
+                        onBack = {
+                            if (backStack.size > 1) {
+                                backStack.removeAt(backStack.size - 1)
+                            }
+                        },
                         modifier = Modifier.padding(innerPadding),
                         entryProvider = entryProvider {
                             entry<Home> { key ->
                                 HomeScreen(
                                     onAboutClick = {
-                                        backStack.clear()
                                         backStack.add(About)
                                     },
                                     onOverviewClick = {
@@ -122,10 +125,11 @@ class MainActivity : ComponentActivity() {
                                 OverviewScreen(
                                     parties = parties,
                                     onAboutClick = {
-                                        backStack.clear()
                                         backStack.add(About)
                                     },
                                     onHomeClick = {
+                                        // Pop everything until Home if possible, or just add Home
+                                        // For simplicity and stability, we just add Home or clear carefully
                                         backStack.add(Home)
                                     },
                                     onPartyClick = { party ->
@@ -155,8 +159,11 @@ class MainActivity : ComponentActivity() {
                                             amount = amount
                                         )
 
-                                        backStack.clear()
-                                        backStack.add(Overview)
+                                        // Navigate back to Overview
+                                        // If we want to clear the Count screen from stack:
+                                        if (backStack.isNotEmpty() && backStack.last() is Count) {
+                                            backStack.removeAt(backStack.size - 1)
+                                        }
                                     }
                                 )
                             }

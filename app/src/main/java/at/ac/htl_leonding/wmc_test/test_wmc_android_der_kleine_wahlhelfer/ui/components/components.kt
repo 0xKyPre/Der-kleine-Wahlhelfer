@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.sp
 
 @Composable
@@ -40,7 +41,7 @@ fun License() {
 fun ContributorCard(
     name: String,
     description: String,
-    image: Int
+    image: ImageVector
 ) {
     Row (
         verticalAlignment = Alignment.CenterVertically,
@@ -50,10 +51,11 @@ fun ContributorCard(
             .padding(10.dp)
             .fillMaxWidth()
     ) {
-        Image(
-            painter = painterResource(image),
+        Icon(
+            imageVector = image,
             contentDescription = "icon",
-            Modifier.height(80.dp)
+            modifier = Modifier.size(80.dp),
+            tint = MaterialTheme.colorScheme.primary
         )
         Column(
 

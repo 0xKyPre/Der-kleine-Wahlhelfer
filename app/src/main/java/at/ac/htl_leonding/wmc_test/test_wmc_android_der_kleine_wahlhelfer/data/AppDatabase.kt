@@ -25,9 +25,11 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "der-kleine-wahlhelfer-db"
-                ).build().also {
-                    INSTANCE = it
-                }
+                )
+                    .fallbackToDestructiveMigration(dropAllTables = true)
+                    .build().also {
+                        INSTANCE = it
+                    }
             }
     }
 }
