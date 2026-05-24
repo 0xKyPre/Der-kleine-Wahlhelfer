@@ -102,10 +102,12 @@ fun AboutScreen(
 
             Spacer(modifier = Modifier.height(10.dp))
 
+            var painter =
+
             ContributorCard(
                 "Kylian Preining",
                 "Android Developer",
-                Icons.Default.AccountCircle
+                R.drawable.mycelium,
             )
 
             Spacer(modifier = Modifier.height(10.dp))
@@ -113,7 +115,7 @@ fun AboutScreen(
             ContributorCard(
                 "Android Studio",
                 "Android IDE",
-                Icons.Default.Build
+                R.drawable.warp
             )
         }
     }

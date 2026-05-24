@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -27,8 +26,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import at.ac.htl_leonding.wmc_test.test_wmc_android_der_kleine_wahlhelfer.R
 
 @Composable
 fun License() {
@@ -41,7 +41,7 @@ fun License() {
 fun ContributorCard(
     name: String,
     description: String,
-    image: ImageVector
+    imageId: Int
 ) {
     Row (
         verticalAlignment = Alignment.CenterVertically,
@@ -51,15 +51,13 @@ fun ContributorCard(
             .padding(10.dp)
             .fillMaxWidth()
     ) {
-        Icon(
-            imageVector = image,
-            contentDescription = "icon",
-            modifier = Modifier.size(80.dp),
-            tint = MaterialTheme.colorScheme.primary
+        Image(
+            painter = painterResource(imageId),
+            contentDescription = "pfp",
+            modifier = Modifier.size(80.dp)
         )
-        Column(
-
-        ) {
+        
+        Column {
             Text(
                 text = name,
                 fontSize = 20.sp,
@@ -80,8 +78,8 @@ fun TopNavBar(
     onAboutClick: () -> Unit,
     onHomeClick: () -> Unit
 ) {
-    val aboutIcon = Icons.Default.Info;
-    val homeIcon = Icons.Default.Home;
+    val aboutIcon = Icons.Default.Info
+    val homeIcon = Icons.Default.Home
 
     Row(
         modifier = Modifier
@@ -120,5 +118,19 @@ fun TopNavBar(
                     .size(24.dp)
             )
         }
+    }
+}
+
+@Preview(
+    showBackground = true
+)
+@Composable
+fun ContributorCardPreview() {
+    MaterialTheme {
+        ContributorCard(
+            "Name",
+            "Description",
+            R.drawable.mycelium
+        )
     }
 }
