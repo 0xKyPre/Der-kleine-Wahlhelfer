@@ -40,52 +40,15 @@ class MainActivity : ComponentActivity() {
 
             val parties by viewModel.parties.collectAsStateWithLifecycle()
 
-            println("DEBUG: parties = $parties")
-
             LaunchedEffect(Unit) {
-
-                if (parties.isEmpty()) {
-
-                    repository.insertParty(
-                        Party(
-                            code = "SPÖ",
-                            name = "Sozialdemokratische Partei Österreichs",
-                            currentVotes = 0
-                        )
-                    )
-
-                    repository.insertParty(
-                        Party(
-                            code = "ÖVP",
-                            name = "Österreichische Volkspartei",
-                            currentVotes = 0
-                        )
-                    )
-
-                    repository.insertParty(
-                        Party(
-                            code = "FPÖ",
-                            name = "Freiheitliche Partei Österreichs",
-                            currentVotes = 0
-                        )
-                    )
-
-                    repository.insertParty(
-                        Party(
-                            code = "Grüne",
-                            name = "Die Grünen",
-                            currentVotes = 0
-                        )
-                    )
-
-                    repository.insertParty(
-                        Party(
-                            code = "NEOS",
-                            name = "NEOS",
-                            currentVotes = 0
-                        )
-                    )
-                }
+                val defaultParties = listOf(
+                    Party("SPÖ", "Sozialdemokratische Partei Österreichs", 0),
+                    Party("ÖVP", "Österreichische Volkspartei", 0),
+                    Party("FPÖ", "Freiheitliche Partei Österreichs", 0),
+                    Party("Grüne", "Die Grünen", 0),
+                    Party("NEOS", "NEOS", 0)
+                )
+                defaultParties.forEach { repository.insertParty(it) }
             }
 
             TestWMCAndroidderkleineWahlhelferTheme {
@@ -115,7 +78,9 @@ class MainActivity : ComponentActivity() {
                             entry<About> { _ ->
                                 AboutScreen(
                                     onClickBack = {
-                                        backStack.removeLastOrNull()
+                                        if (backStack.size > 1) {
+                                            backStack.removeAt(backStack.size - 1)
+                                        }
                                     }
                                 )
                             }
@@ -156,8 +121,6 @@ class MainActivity : ComponentActivity() {
                                             amount = amount
                                         )
 
-                                        // Navigate back to Overview
-                                        // If we want to clear the Count screen from stack:
                                         if (backStack.isNotEmpty() && backStack.last() is Count) {
                                             backStack.removeAt(backStack.size - 1)
                                         }

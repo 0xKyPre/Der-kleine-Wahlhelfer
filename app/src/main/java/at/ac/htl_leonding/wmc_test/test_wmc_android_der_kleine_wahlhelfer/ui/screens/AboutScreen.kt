@@ -89,7 +89,7 @@ fun AboutScreen(
                     .padding(16.dp)
             ) {
                 Text(
-                    text = "This is an open-source vote-helper app inspired by the Mycelium aesthetic. It helps you count and manage votes with ease.",
+                    text = "This is an open-source voting assistant designed to simplify the process of collecting, managing, and counting votes. It allows users to efficiently handle multiple parties, track results in real time, and maintain clear and structured vote data. The application focuses on accuracy, transparency, and ease of use, making it suitable for educational, organizational, or experimental voting scenarios.",
                     color = MaterialTheme.colorScheme.onSurface
                 )
             }

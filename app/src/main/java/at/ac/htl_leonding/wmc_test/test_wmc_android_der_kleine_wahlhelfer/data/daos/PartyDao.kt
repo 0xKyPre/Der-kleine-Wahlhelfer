@@ -11,7 +11,7 @@ interface PartyDao {
     @Query("SELECT * FROM parties")
     fun getAllParties(): Flow<List<Party>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertParty(party: Party)
 
     @Update
