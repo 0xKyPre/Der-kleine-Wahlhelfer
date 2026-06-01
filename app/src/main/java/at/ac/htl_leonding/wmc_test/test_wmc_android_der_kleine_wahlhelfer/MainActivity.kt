@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
                 val defaultParties = listOf(
                     Party("SPÖ", "Sozialdemokratische Partei Österreichs", 0),
                     Party("ÖVP", "Österreichische Volkspartei", 0),
-                    Party("FPÖ", "Freiheitliche Partei Österreichs", 0),
+                    Party("FPÖ", "Feiheitliche Partei Österreichs", 0),
                     Party("Grüne", "Die Grünen", 0),
                     Party("NEOS", "NEOS", 0)
                 )
@@ -93,6 +93,9 @@ class MainActivity : ComponentActivity() {
                                     },
                                     onHomeClick = {
                                         backStack.add(Home)
+                                    },
+                                    onClearAllClick = {
+                                        viewModel.clearAllVotes()
                                     },
                                     onPartyClick = { party ->
                                         backStack.add(

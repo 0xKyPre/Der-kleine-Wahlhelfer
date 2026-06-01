@@ -22,4 +22,8 @@ class PartyRepository(
     ) {
         dao.insertParty(party)
     }
+
+    suspend fun resetAllVotes() {
+        dao.resetAllVotes()
+    }
 }

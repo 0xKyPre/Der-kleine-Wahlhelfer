@@ -22,4 +22,7 @@ interface PartyDao {
 
     @Query("DELETE FROM parties")
     suspend fun deleteAll()
+
+    @Query("UPDATE parties SET currentVotes = 0")
+    suspend fun resetAllVotes()
 }

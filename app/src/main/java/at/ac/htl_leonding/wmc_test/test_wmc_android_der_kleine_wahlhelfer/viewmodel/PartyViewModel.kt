@@ -29,4 +29,10 @@ class PartyViewModel(
             )
         }
     }
+
+    fun clearAllVotes() {
+        viewModelScope.launch {
+            repository.resetAllVotes()
+        }
+    }
 }
