@@ -3,7 +3,6 @@ package at.ac.htl_leonding.wmc_test.test_wmc_android_der_kleine_wahlhelfer.ui.th
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
@@ -23,10 +22,9 @@ private val MyceliumColorScheme = darkColorScheme(
 @Composable
 fun TestWMCAndroidderkleineWahlhelferTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = false, // Disabled for consistent Mycelium look
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
-    // We use the Mycelium theme regardless of system dark mode for the specific requested look
     val colorScheme = MyceliumColorScheme
 
     MaterialTheme(

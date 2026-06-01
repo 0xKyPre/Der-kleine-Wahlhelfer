@@ -2,7 +2,6 @@ package at.ac.htl_leonding.wmc_test.test_wmc_android_der_kleine_wahlhelfer.ui.th
 
 import androidx.compose.ui.graphics.Color
 
-// Mycelium Theme Colors
 val MyceliumGray = Color(0xFF6D5D6E)
 val MyceliumPurple = Color(0xFF917FB3)
 val MyceliumDark = Color(0xFF393646)
